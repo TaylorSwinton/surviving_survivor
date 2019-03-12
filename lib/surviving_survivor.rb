@@ -1,4 +1,5 @@
-require "surviving_survivor/version"
+require_relative "survivingsurvivorfile/version"
+require_relative "../config/environment"
 
 #should contain your modules!!! that apply to multiple classes
 

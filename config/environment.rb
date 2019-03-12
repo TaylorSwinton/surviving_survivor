@@ -1,3 +1,15 @@
+require 'open-uri'
+require 'nokogiri'
+require 'pry'
+
+require_relative '../lib/survivingsurvivorfile/command_line_interface.rb'
+require_relative '../lib/survivingsurvivorfile/scraper.rb'
+#require 'require_all'
+#require_relative '' <--extra files
+
+
+
+=begin
 require 'bundler'
 Bundler.require
 
@@ -8,3 +20,4 @@ end
 require_relative '../lib/surviving_survivor/surviving_survivor.rb'
 
 require_all 'lib'
+=end
