@@ -2,5 +2,6 @@
 
 require_relative '../lib/surviving_survivor.rb'#'../lib/survivingsurvivorfile'
 
-SurvivingSurvivor::Scraper.new
+SurvivingSurvivor::ScraperKoah.new
+SurvivingSurvivor::ScraperWorlds.new
 SurvivingSurvivor::CommandLineInterface.new.call

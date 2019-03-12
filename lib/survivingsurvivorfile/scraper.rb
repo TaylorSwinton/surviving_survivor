@@ -1,10 +1,13 @@
-#require 'open-uri'
 #require 'nokogiri'
-#require 'pry'
+#require 'open-uri'
+require 'pry'
 
 class SurvivingSurvivor::ScraperKoah
+
     def self.scrape_season_information_k
-        
+        html = open('https://survivor.fandom.com/wiki/Survivor:_Ka%C3%B4h_R%C5%8Dng')
+        doc = Nokogiri::HTML(html)
+        binding.pry
     end
 
     def self.scrape_castaways_k
@@ -17,6 +20,7 @@ class SurvivingSurvivor::ScraperKoah
 end
 
 class SurvivingSurvivor::ScraperWorlds
+
     def self.scrape_season_information_w
         
     end
