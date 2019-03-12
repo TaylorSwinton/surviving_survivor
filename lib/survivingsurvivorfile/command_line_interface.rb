@@ -7,16 +7,18 @@ class SurvivingSurvivor::CommandLineInterface
     def call
         input = ''
         while input != 'exit'
-            puts "So you want to Survive Survivor?"
+            puts "So you want to survive Survivor?"
             puts "Outwit, outplay, and outlast with all the Survivor details"
-            puts "Please choose a season by entering your numbered choice (1/2)."
+            puts "Please choose a season by entering 'koah' or 'worlds' or exit by typing 'exit'"
             list_seasons
+
             input = gets.strip
-            if input != 1 || 2
-                puts "Please enter a numeric choice or 'exit'." #Create a meta error
-            elsif input == 1
+            same = input.downcase
+            
+            case same
+            when 'koah'
                 survivorkoahrong
-            else input == 2
+            when 'worlds'
                 survivorworldsapart
             end
         end
@@ -36,18 +38,18 @@ class SurvivingSurvivor::CommandLineInterface
             puts "To see general season information type 'info'"
             puts "To see the castaways type 'castaways'"
             puts "To see the names of the episodes and who was elimanted type 'episode'"
-            puts "Choose an option below:"
+            puts "Choose an option below or exit by typing 'exit':"
 
             input = gets.strip
 
             same = input.downcase
             case same
             when 'info'
-                ##
+                info_koah
             when 'castaways'
-                ##
+                castaways_koah
             when 'episode'
-                ##
+                episode_koah
             end
         end
     end
@@ -61,20 +63,44 @@ class SurvivingSurvivor::CommandLineInterface
             puts "To see general season information type 'info'"
             puts "To see the castaways type 'castaways'"
             puts "To see the names of the episodes and who was elimanted type 'episode'"
-            puts "Choose an option below:"
+            puts "Choose an option below or exit by typing 'exit':"
 
             input = gets.strip
             
             same = input.downcase
             case same
             when 'info'
-                ##
+                info_worlds
             when 'castaways'
-                ##
+                castaways_worlds
             when 'episode'
-                ##
+                episode_worlds
             end
         end
+    end
+
+    def info_koah
+        
+    end
+
+    def castaways_koah
+        
+    end
+
+    def episode_koah
+        
+    end
+
+    def info_worlds
+        
+    end
+
+    def castaways_worlds
+        
+    end
+
+    def episode_koah
+        
     end
 
 end
