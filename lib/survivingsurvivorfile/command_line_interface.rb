@@ -35,9 +35,9 @@ class SurvivingSurvivor::CommandLineInterface
             puts "Welcome to Kaôh Rōng!"
             puts "Where the division of the tribes is based on the most prominent personal attributes of each castaway."
             puts "What else do you want to know about surviving Kaôh Rōng?"
-            puts "To see general season information type 'info'"
-            puts "To see the castaways type 'castaways'"
-            puts "To see the names of the episodes and who was elimanted type 'episode'"
+            puts "  To see general season information type 'info'"
+            puts "  To see the castaways type 'castaways'"
+            puts "  To see the names of the episodes and who was elimanted type 'episode'"
             puts "Choose an option below or exit by typing 'exit':"
 
             input = gets.strip
@@ -60,9 +60,9 @@ class SurvivingSurvivor::CommandLineInterface
             puts "Welcome to Kaôh Rōng!"
             puts "Where the division of the tribes is based on the most prominent personal attributes of each castaway."
             puts "What else do you want to know about surviving Kaôh Rōng?"
-            puts "To see general season information type 'info'"
-            puts "To see the castaways type 'castaways'"
-            puts "To see the names of the episodes and who was elimanted type 'episode'"
+            puts "  To see general season information type 'info'"
+            puts "  To see the castaways type 'castaways'"
+            puts "  To see the names of the episodes and who was elimanted type 'episode'"
             puts "Choose an option below or exit by typing 'exit':"
 
             input = gets.strip
@@ -80,27 +80,45 @@ class SurvivingSurvivor::CommandLineInterface
     end
 
     def info_koah
-        
+        #should pull the 'season information'
+        #shoudld show the :version, :seasonno, :Filiminglocation, :filimingdates, :seasonrun, :noofepisodes, :noofdays, :noofcastaways, :winner, :runnerup, :tribes, :viership
     end
 
     def castaways_koah
-        
+        #should list their name
+        #should list their age
+        #should list their location
+        #should list their job
+        #should list their original tribe
+        #should list how they finished
+        #should list the votes against them
     end
 
     def episode_koah
-        
+        #should list episode name
+        #should list episode air date
+        #should list who was eliminated
     end
 
     def info_worlds
-        
+         #should pull the 'season information'
+        #shoudld show the :version, :seasonno, :Filiminglocation, :filimingdates, :seasonrun, :noofepisodes, :noofdays, :noofcastaways, :winner, :runnerup, :tribes, :viership
     end
 
     def castaways_worlds
-        
+        #should list their name
+        #should list their age
+        #should list their location
+        #should list their job
+        #should list their original tribe
+        #should list how they finished
+        #should list the votes against them
     end
 
     def episode_koah
-        
+        #should list episode name
+        #should list episode air date
+        #should list who was eliminated
     end
 
 end
