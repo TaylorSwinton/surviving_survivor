@@ -4,6 +4,7 @@ require 'pry'
 
 require_relative '../lib/survivingsurvivorfile/command_line_interface.rb'
 require_relative '../lib/survivingsurvivorfile/scraper.rb'
+require_relative '../lib/survivingsurvivorfile/castaways.rb'
 #require 'require_all'
 #require_relative '' <--extra files
 
