@@ -49,6 +49,7 @@ class CommandLineInterface
     def survivorkoahrong
         input = ''
         while input != 'exit'
+            puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
             puts "Welcome to Kaôh Rōng!"
             puts "Where the division of the tribes is based on the most prominent personal attributes of each castaway."
             puts "What else do you want to know about surviving Kaôh Rōng?"
@@ -75,7 +76,7 @@ class CommandLineInterface
     def survivorworldsapart
         input = ''
         while input != 'exit'
-            puts "Welcome to Kaôh Rōng!"
+            puts "Welcome to Worlds Apart!"
             puts "Where the division of the tribes is based on the economic/professional background of their members."
             puts "What else do you want to know about surviving Worlds Apart?"
             puts "  To see general season information type 'info'"
@@ -105,20 +106,36 @@ class CommandLineInterface
 
     def castaways_koah
         ScraperKoah.scrape_castaways_k
-        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         puts "CASTAWAYS: "
         puts "To see more details about the castaways type their number:"
         Castaway.all.each_with_index do |cast, index|
             puts "  #{index+1}. #{cast.name}"
         end
-        #display_cast
-        #should list their name
-        #should list their age
-        #should list their location
-        #should list their job
-        #should list their original tribe
-        #should list how they finished
-        #should list the votes against them
+        
+        input = gets.strip
+        cast = Castaway.all[input.to_i-1]
+
+        if cast == nil 
+            puts "please enter a number for your choice of Castaways"
+            self.castaways_koah
+        else
+            ScraperKoah.castaways_details_k(cast)
+        end
+
+        castaways_koah_details(cast)
+    end
+
+    def castaways_koah_details(cast)
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "Your castaway choice"
+        puts cast.age
+        puts cast.hometown
+        puts cast.occupation
+        puts cast.tribe
+        puts cast.inspiration
+        puts cast.describe
+        puts "Choose another option: "
     end
 
     def episode_koah

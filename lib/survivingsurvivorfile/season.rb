@@ -21,7 +21,6 @@ class Season
         @runnerup = runnerup
         @tribes = tribes
         @viewship = viewship
-        @@all << self
     end
 
     def self.all

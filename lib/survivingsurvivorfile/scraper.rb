@@ -39,10 +39,17 @@ class ScraperKoah
         end
     end
 
-    def self.castaways_details_k(castaway)
-        url = SITE + castaway.profile_url
+    def self.castaways_details_k(cast)
+        url = SITE + cast.profile_url
         doc = Nokogiri::HTML(open(url))
-        binding.pry
+        
+        cast.age = doc.css(".cast-bio").css("p").first.text
+        cast.hometown = doc.css(".cast-bio").css("p:nth-child(3)").text
+        cast.occupation = doc.css(".cast-bio").css("p:nth-child(4)").text
+        cast.tribe = doc.css(".cast-bio").css("p:nth-child(2)").text
+        cast.inspiration = doc.css(".cast-bio").css("p:nth-child(6)").text
+        cast.describe = doc.css(".cast-bio").css("p:nth-child(9)").text
+        #binding.pry
         #castaway.
     end
 end
