@@ -1,7 +1,3 @@
-#require_relative "../lib/scraper.rb"
-#require_relative "" <-- put whatever extra files you need 
-#require 'nokogiri'
-
 class CommandLineInterface
 
     def call
@@ -28,8 +24,6 @@ class CommandLineInterface
     end
 
     def user_choice
-        input = ''
-        while input != 'exit'
             input = gets.strip
             same = input.downcase
             
@@ -43,12 +37,9 @@ class CommandLineInterface
             when '2'
                 puts "please enter 'koah' or 'worlds'"
             end
-        end
     end
 
     def survivorkoahrong
-        input = ''
-        while input != 'exit'
             puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
             puts "Welcome to Kaôh Rōng!"
             puts "Where the division of the tribes is based on the most prominent personal attributes of each castaway."
@@ -69,8 +60,6 @@ class CommandLineInterface
             when 'episode'
                 episode_koah
             end
-        end
-        call
     end
     
     def survivorworldsapart
@@ -100,6 +89,7 @@ class CommandLineInterface
     end
 
     def info_koah
+        ScraperKoah.scrape_season_information_k
         #should pull the 'season information'
         #shoudld show the :version, :seasonno, :Filiminglocation, :filimingdates, :seasonrun, :noofepisodes, :noofdays, :noofcastaways, :winner, :runnerup, :tribes, :viership
     end
@@ -135,7 +125,10 @@ class CommandLineInterface
         puts cast.tribe
         puts cast.inspiration
         puts cast.describe
+        puts ""
+        puts ""
         puts "Choose another option: "
+        input = gets.strip
     end
 
     def episode_koah

@@ -1,28 +1,29 @@
 class ScraperKoah
 
-    CAST = 'https://www.cbs.com/shows/survivor/cast/season/32/'
+    CAST = 'https://www.cbs.com/shows/survivor/cast/season/32/' #koahrong
+    SEASON = 'https://survivor.fandom.com/wiki/Survivor:_Ka%C3%B4h_R%C5%8Dng' #koahrong
     SITE = 'https://www.cbs.com'
-    SEASON = ''
     CASTW = ''
     SEASONW = ''
 
     def self.scrape_season_information_k
-        #file = open(WIKI)
-        #doc = Nokogiri::HTML(file)
-        #binding.pry
+        file = open(SEASON)
+        doc = Nokogiri::HTML(file)
 
-        #version = doc.css("tbody")[0].css("tr")[9].css("td").text
-        #seasonnumber = ''
-        #filmlocation= doc.css("tbody")[0].css("tr")[7].css("td").text
-        #filmdates = doc.css("tbody")[0].css("tr")[15].css("td").text
-        #seasonrun = doc.css("tbody")[0].css("tr")[13].css("td").text
-        #noofepi = doc.css("tbody")[0].css("tr")[10].css("td").text
-        #noofdays = ''
-        #noofcastaways = ''
-        #winner = doc.css("tbody")[0].css("tr")[6].css("td").text
-        #runnerup = ''
-        #tribes = ''
-        #viewship = ''
+        version = doc.css("aside").css("section").first.css("div").first.css("div").text
+        seasonnumber = doc.css("aside").css("section")[0].css("div")[2].css("div").text
+        filmlocation= doc.css("aside").css("section")[0].css("div")[4].css("div").text
+        filmdates = doc.css("aside").css("section")[0].css("div")[6].css("div").text
+        seasonrun = doc.css("aside").css("section")[0].css("div")[8].css("div").text
+        noofepi = doc.css("aside").css("section")[0].css("div")[10].css("div").text
+        noofdays = doc.css("aside").css("section")[0].css("div")[12].css("div").text
+        noofcastaways = doc.css("aside").css("section")[0].css("div")[14].css("div").text
+        winner = doc.css("aside").css("section")[0].css("div")[16].css("div").text
+        runnerup = doc.css("aside").css("section")[0].css("div")[18].css("div").text #need to be seperated
+        tribes = doc.css("aside").css("section")[0].css("div")[20].css("div").text #need to be seperated
+        viewship = doc.css("aside").css("section")[0].css("div")[22].css("div").text
+
+        #binding.pry
     end
 
     def self.scrape_castaways_k
@@ -31,7 +32,7 @@ class ScraperKoah
         #binding.pry
 
         castaways = doc.css("article")
-        castaways.each do |castaway|
+        castaways.drop(1).each do |castaway|
             name = castaway.css(".title").text
             profile_url = castaway.css("a").first["href"]
             #binding.pry
