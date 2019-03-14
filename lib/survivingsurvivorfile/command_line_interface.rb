@@ -5,21 +5,31 @@
 class CommandLineInterface
 
     def call
-        
-        ScraperKoah.scrape_season_information_k
-        ScraperKoah.scrape_castaways_k
-        ScraperKoah.castaways_details_k
-        ScraperWorlds.scrape_season_information_w
-        ScraperWorlds.scrape_castaways_w
-        ScraperWorlds.castaways_details_w
+        #ScraperKoah.scrape_season_information_k
+        #ScraperKoah.scrape_castaways_k
+        #ScraperKoah.castaways_details_k
+        #ScraperWorlds.scrape_season_information_w
+        #ScraperWorlds.scrape_castaways_w
+        #ScraperWorlds.castaways_details_w
+        welcome
+        list_seasons
+        user_choice
+    end
 
+    def welcome
+        puts "So you want to survive Survivor?"
+        puts "Outwit, outplay, and outlast with all the Survivor details"
+        puts "Please choose a season by entering 'koah' or 'worlds'. If you would like to exit type 'exit'"
+    end
+
+    def list_seasons
+        puts "  1. Survivor: Kaôh Rōng — Brains vs. Brawn vs. Beauty"
+        puts "  2. Survivor: Worlds Apart — White Collar vs. Blue Collar vs. No Collar"
+    end
+
+    def user_choice
         input = ''
         while input != 'exit'
-            puts "So you want to survive Survivor?"
-            puts "Outwit, outplay, and outlast with all the Survivor details"
-            puts "Please choose a season by entering 'koah' or 'worlds'. If you would like to exit type 'exit'"
-            list_seasons
-
             input = gets.strip
             same = input.downcase
             
@@ -28,13 +38,12 @@ class CommandLineInterface
                 survivorkoahrong
             when 'worlds'
                 survivorworldsapart
+            when '1'
+                puts "please enter 'koah' or 'worlds'"
+            when '2'
+                puts "please enter 'koah' or 'worlds'"
             end
         end
-    end
-
-    def list_seasons
-        puts "  1. Survivor: Kaôh Rōng — Brains vs. Brawn vs. Beauty"
-        puts "  2. Survivor: Worlds Apart — White Collar vs. Blue Collar vs. No Collar"
     end
 
     def survivorkoahrong
@@ -60,14 +69,15 @@ class CommandLineInterface
                 episode_koah
             end
         end
+        call
     end
     
     def survivorworldsapart
         input = ''
         while input != 'exit'
             puts "Welcome to Kaôh Rōng!"
-            puts "Where the division of the tribes is based on the most prominent personal attributes of each castaway."
-            puts "What else do you want to know about surviving Kaôh Rōng?"
+            puts "Where the division of the tribes is based on the economic/professional background of their members."
+            puts "What else do you want to know about surviving Worlds Apart?"
             puts "  To see general season information type 'info'"
             puts "  To see the castaways type 'castaways'"
             puts "  To see the names of the episodes and who was elimanted type 'episode'"
@@ -85,6 +95,7 @@ class CommandLineInterface
                 episode_worlds
             end
         end
+        call
     end
 
     def info_koah
@@ -93,6 +104,13 @@ class CommandLineInterface
     end
 
     def castaways_koah
+        ScraperKoah.scrape_castaways_k
+        puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        puts "CASTAWAYS: "
+        puts "To see more details about the castaways type their number:"
+        Castaway.all.each_with_index do |cast, index|
+            puts "  #{index+1}. #{cast.name}"
+        end
         #display_cast
         #should list their name
         #should list their age

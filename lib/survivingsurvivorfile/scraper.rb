@@ -1,6 +1,10 @@
 class ScraperKoah
 
-    WIKI = 'https://www.cbs.com/shows/survivor/cast/season/32/'
+    CAST = 'https://www.cbs.com/shows/survivor/cast/season/32/'
+    SITE = 'https://www.cbs.com'
+    SEASON = ''
+    CASTW = ''
+    SEASONW = ''
 
     def self.scrape_season_information_k
         #file = open(WIKI)
@@ -22,7 +26,7 @@ class ScraperKoah
     end
 
     def self.scrape_castaways_k
-        file = open(WIKI)
+        file = open(CAST)
         doc = Nokogiri::HTML(file)
         #binding.pry
 
@@ -35,8 +39,11 @@ class ScraperKoah
         end
     end
 
-    def self.castaways_details_k
-        
+    def self.castaways_details_k(castaway)
+        url = SITE + castaway.profile_url
+        doc = Nokogiri::HTML(open(url))
+        binding.pry
+        #castaway.
     end
 end
 

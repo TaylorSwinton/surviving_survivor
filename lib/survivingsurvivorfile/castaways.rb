@@ -1,5 +1,5 @@
 class Castaway
-    attr_accessor :born, :hometown, :occupation, :tribe, :finished, :votesagainst, :dayslasted, :profile_url
+    attr_accessor :age, :hometown, :occupation, :tribe, :inspiration, :describe, :profile_url
     attr_reader :name
 
     @@all = []
