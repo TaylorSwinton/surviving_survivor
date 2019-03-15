@@ -1,12 +1,6 @@
 class CommandLineInterface
 
     def call
-        #ScraperKoah.scrape_season_information_k
-        #ScraperKoah.scrape_castaways_k
-        #ScraperKoah.castaways_details_k
-        #ScraperWorlds.scrape_season_information_w
-        #ScraperWorlds.scrape_castaways_w
-        #ScraperWorlds.castaways_details_w
         welcome
         list_seasons
         user_choice
@@ -16,12 +10,12 @@ class CommandLineInterface
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         puts "So you want to survive Survivor?"
         puts "Outwit, outplay, and outlast with all the Survivor details"
-        puts "Please choose a season by entering 'koah' or 'worlds'. If you would like to exit type 'exit'"
+        puts "Please choose a season by entering 'koah' or 'mil'. If you would like to exit type 'exit'"
     end
 
     def list_seasons
         puts "  1. Survivor: Kaôh Rōng — Brains vs. Brawn vs. Beauty"
-        puts "  2. Survivor: Worlds Apart — White Collar vs. Blue Collar vs. No Collar"
+        puts "  2. Survivor: Millennials vs. Gen X"
     end
 
     def user_choice
@@ -31,12 +25,12 @@ class CommandLineInterface
             case same
             when 'koah'
                 survivorkoahrong
-            when 'worlds'
-                survivorworldsapart
+            when 'mil'
+                survivormilvsgen
             when '1'
-                puts "please enter 'koah' or 'worlds'"
+                puts "please enter 'koah' or 'mil'"
             when '2'
-                puts "please enter 'koah' or 'worlds'"
+                puts "please enter 'koah' or 'mil'"
             end
     end
 
@@ -48,6 +42,7 @@ class CommandLineInterface
             puts "  To see general season information type 'info'"
             puts "  To see the castaways type 'castaways'"
             puts "  To see the names of the episodes and who was elimanted type 'episode'"
+            puts "  To go back to the main meny type 'menu'"
             puts "Enter your choice below or exit by typing 'exit':"
 
             input = gets.strip
@@ -60,33 +55,35 @@ class CommandLineInterface
                 castaways_koah
             when 'episode'
                 episode_koah
+            when 'menu'
+                call
             end
     end
     
-    def survivorworldsapart
-        input = ''
-        while input != 'exit'
-            puts "Welcome to Worlds Apart!"
-            puts "Where the division of the tribes is based on the economic/professional background of their members."
-            puts "What else do you want to know about surviving Worlds Apart?"
-            puts "  To see general season information type 'info'"
-            puts "  To see the castaways type 'castaways'"
-            puts "  To see the names of the episodes and who was elimanted type 'episode'"
-            puts "Choose an option below or exit by typing 'exit':"
+    def survivormilvsgen
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "Welcome to Millennials vs. Gen X!"
+        puts "Where the division of the tribes were divided based on generation: Millennials vs. Gen X."
+        puts "What else do you want to know about surviving Millennials vs. Gen X?"
+        puts "  To see general season information type 'info'"
+        puts "  To see the castaways type 'castaways'"
+        puts "  To see the names of the episodes and who was elimanted type 'episode'"
+        puts "  To go back to the main menu type 'menu'"
+        puts "Enter your choice below or exit by typing 'exit':"
 
-            input = gets.strip
-            
-            same = input.downcase
-            case same
-            when 'info'
-                info_worlds
-            when 'castaways'
-                castaways_worlds
-            when 'episode'
-                episode_worlds
-            end
+        input = gets.strip
+
+        same = input.downcase
+        case same
+        when 'info'
+            info_mil
+        when 'castaways'
+            castaways_mil
+        when 'episode'
+            episode_mil
+        when 'menu'
+            call
         end
-        call
     end
 
     def info_koah
@@ -146,7 +143,7 @@ class CommandLineInterface
 
     def castaways_koah_details(cast)
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        puts "Your castaway choice"
+        puts "Your castaway choice: "
         puts cast.age
         puts cast.hometown
         puts cast.occupation
@@ -176,25 +173,76 @@ class CommandLineInterface
         #should list who was eliminated
     end
 
-    def info_worlds
+    def episode_koah_details(episode)
+        
+    end
+
+    def info_mil
          #should pull the 'season information'
         #shoudld show the :version, :seasonno, :Filiminglocation, :filimingdates, :seasonrun, :noofepisodes, :noofdays, :noofcastaways, :winner, :runnerup, :tribes, :viership
     end
 
-    def castaways_worlds
-        #should list their name
-        #should list their age
-        #should list their location
-        #should list their job
-        #should list their original tribe
-        #should list how they finished
-        #should list the votes against them
+    def castaways_mil
+        ScraperWorlds.scrape_castaways_m
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "CASTAWAYS Worlds Apart: "
+        puts "To see more details about the castaways type their number:"
+        Castaway.all.each_with_index do |cast, index|
+            puts "  #{index+1}. #{cast.name}"
+        end
+        
+        input = gets.strip
+        cast = Castaway.all[input.to_i-1]
+
+        if cast == nil 
+            puts "please enter a number for your choice of Castaways"
+            self.castaways_mil
+        else
+            ScraperWorlds.castaways_details_m(cast)
+        end
+
+        castaways_mil_details(cast)
     end
 
-    def episode_koah
+    def castaways_mil_details(cast)
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "Your castaway choice: "
+        puts cast.name
+        puts ''
+        puts cast.age
+        puts ''
+        puts cast.hometown
+        puts ''
+        puts cast.occupation
+        puts ''
+        puts cast.tribe
+        puts cast.inspiration
+        puts cast.describe
+        puts ""
+        puts "To exit type 'exit'"
+        puts "To select another Castaway type 'castaways'"
+        puts "To see more choices about Survivor Millennials vs. Gen X type 'mil"
+        puts "To see go back to the main menu type 'menu'"
+        input = gets.strip
+
+        case input
+        when 'castaways'
+            castaways_mil
+        when 'mil'
+            survivormilvsgen
+        when 'menu'
+            call
+        end
+    end
+
+    def episode_mil
         #should list episode name
         #should list episode air date
         #should list who was eliminated
+    end
+
+    def episode_mil_details(episode)
+        
     end
 
 end

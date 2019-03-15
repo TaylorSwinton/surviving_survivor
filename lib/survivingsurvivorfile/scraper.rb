@@ -3,8 +3,6 @@ class ScraperKoah
     CAST = 'https://www.cbs.com/shows/survivor/cast/season/32/' #koahrong
     SEASON = 'https://survivor.fandom.com/wiki/Survivor:_Ka%C3%B4h_R%C5%8Dng' #koahrong
     SITE = 'https://www.cbs.com'
-    CASTW = ''
-    SEASONW = ''
 
     def self.scrape_season_information_k
         file = open(SEASON)
@@ -59,15 +57,40 @@ end
 
 class ScraperWorlds
 
-    def self.scrape_season_information_w
+    SITE = 'https://www.cbs.com'
+    CASTW = 'https://www.cbs.com/shows/survivor/cast/season/33/'
+    SEASONW = 'https://survivor.fandom.com/wiki/Survivor:_Millennials_vs._Gen_X'
+
+    def self.scrape_season_information_m
         
     end
 
-    def self.scrape_castaways_w
-        
+    def self.scrape_castaways_m
+        file = open(CASTW)
+        doc = Nokogiri::HTML(file)
+        #binding.pry
+        # name and profile url
+        castaways = doc.css("article")
+        castaways.drop(1).each do |castaway|
+            name = castaway.css(".title").text
+            profile_url = castaway.css("a").first["href"]
+            #binding.pry
+            Castaway.new(name).tap {|cast| cast.profile_url = profile_url}
+        end
     end
 
-    def self.castaways_details_w
-        
+    def self.castaways_details_m(cast)
+        url = SITE + cast.profile_url
+        doc = Nokogiri::HTML(open(url))
+    
+        begin_info = doc.css(".cast-bio").css("p").first.text
+        stringed = String begin_info
+        stringed_split = stringed.split("\r\n")
+        cast.age = stringed_split[2]
+        cast.hometown = stringed_split[3]
+        cast.occupation = stringed_split[4]
+        cast.tribe = stringed_split[5]
+        cast.inspiration = doc.css(".cast-bio").css("p:nth-child(8)").text
+        cast.describe = doc.css(".cast-bio").css("p:nth-child(2)").text
     end
 end
