@@ -9,20 +9,22 @@ class ScraperKoah
     def self.scrape_season_information_k
         file = open(SEASON)
         doc = Nokogiri::HTML(file)
+        #binding.pry
+        name = doc.css("aside").css("h2").first.text
+        new_season = Season.new(name)
 
-        version = doc.css("aside").css("section").first.css("div").first.css("div").text
-        seasonnumber = doc.css("aside").css("section")[0].css("div")[2].css("div").text
-        filmlocation= doc.css("aside").css("section")[0].css("div")[4].css("div").text
-        filmdates = doc.css("aside").css("section")[0].css("div")[6].css("div").text
-        seasonrun = doc.css("aside").css("section")[0].css("div")[8].css("div").text
-        noofepi = doc.css("aside").css("section")[0].css("div")[10].css("div").text
-        noofdays = doc.css("aside").css("section")[0].css("div")[12].css("div").text
-        noofcastaways = doc.css("aside").css("section")[0].css("div")[14].css("div").text
-        winner = doc.css("aside").css("section")[0].css("div")[16].css("div").text
-        runnerup = doc.css("aside").css("section")[0].css("div")[18].css("div").text #need to be seperated
-        tribes = doc.css("aside").css("section")[0].css("div")[20].css("div").text #need to be seperated
-        viewship = doc.css("aside").css("section")[0].css("div")[22].css("div").text
-
+        new_season.version = doc.css("aside").css("section").first.css("div").first.css("div").text
+        new_season.seasonnumber = doc.css("aside").css("section")[0].css("div")[2].css("div").text
+        new_season.filmlocation= doc.css("aside").css("section")[0].css("div")[4].css("div").text
+        new_season.filmdates = doc.css("aside").css("section")[0].css("div")[6].css("div").text
+        new_season.seasonrun = doc.css("aside").css("section")[0].css("div")[8].css("div").text
+        new_season.noofepi = doc.css("aside").css("section")[0].css("div")[10].css("div").text
+        new_season.noofdays = doc.css("aside").css("section")[0].css("div")[12].css("div").text
+        new_season.noofcastaways = doc.css("aside").css("section")[0].css("div")[14].css("div").text
+        new_season.winner = doc.css("aside").css("section")[0].css("div")[16].css("div").text
+        new_season.runnerup = doc.css("aside").css("section")[0].css("div")[18].css("div").text #need to be seperated
+        new_season.tribes = doc.css("aside").css("section")[0].css("div")[20].css("div").text #need to be seperated
+        new_season.viewship = doc.css("aside").css("section")[0].css("div")[22].css("div").text
         #binding.pry
     end
 

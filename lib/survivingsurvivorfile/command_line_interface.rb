@@ -13,6 +13,7 @@ class CommandLineInterface
     end
 
     def welcome
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         puts "So you want to survive Survivor?"
         puts "Outwit, outplay, and outlast with all the Survivor details"
         puts "Please choose a season by entering 'koah' or 'worlds'. If you would like to exit type 'exit'"
@@ -90,14 +91,41 @@ class CommandLineInterface
 
     def info_koah
         ScraperKoah.scrape_season_information_k
-        #should pull the 'season information'
-        #shoudld show the :version, :seasonno, :Filiminglocation, :filimingdates, :seasonrun, :noofepisodes, :noofdays, :noofcastaways, :winner, :runnerup, :tribes, :viership
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "SEASON INFORMATION:"
+
+        Season.all.each do |info|
+            puts "#{info.name}"
+            puts "  Version:  #{info.version}"
+            puts "  Season Number:  #{info.seasonnumber}"
+            puts "  Film Location:  #{info.filmlocation}"
+            puts "  Film Dates:  #{info.filmdates}"
+            puts "  Season Run:  #{info.seasonrun}"
+            puts "  Number of Episodes:  #{info.noofepi}"
+            puts "  Number of Days:  #{info.noofdays}"
+            puts "  Number of Castaways:  #{info.noofcastaways}"
+            puts "  Winner:  #{info.winner}"
+            puts "  Runner-ups:  #{info.runnerup}"
+            puts "  Tribes:  #{info.tribes}"
+            puts "  Viewership in Millions:  #{info.viewship}"
+        end
+        puts "To exit type 'exit'"
+        puts "To see more choices about Survivor Kaôh Rōng type 'koah'"
+        puts "To see go back to the main menu type 'menu'"
+        input = gets.strip
+        
+        case input
+        when 'koah'
+            survivorkoahrong
+        when 'menu'
+            call
+        end
     end
 
     def castaways_koah
         ScraperKoah.scrape_castaways_k
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        puts "CASTAWAYS: "
+        puts "CASTAWAYS Kaôh Rōng: "
         puts "To see more details about the castaways type their number:"
         Castaway.all.each_with_index do |cast, index|
             puts "  #{index+1}. #{cast.name}"
@@ -126,9 +154,20 @@ class CommandLineInterface
         puts cast.inspiration
         puts cast.describe
         puts ""
-        puts ""
-        puts "Choose another option: "
+        puts "To exit type 'exit'"
+        puts "To select another Castaway type 'castaways'"
+        puts "To see more choices about Survivor Kaôh Rōng type 'koah'"
+        puts "To see go back to the main menu type 'menu'"
         input = gets.strip
+
+        case input
+        when 'castaways'
+            castaways_koah
+        when 'koah'
+            survivorkoahrong
+        when 'menu'
+            call
+        end
     end
 
     def episode_koah
