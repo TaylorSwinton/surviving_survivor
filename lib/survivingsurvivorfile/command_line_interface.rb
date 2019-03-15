@@ -22,16 +22,17 @@ class CommandLineInterface
             input = gets.strip
             same = input.downcase
             
-            case same
-            when 'koah'
-                survivorkoahrong
-            when 'mil'
-                survivormilvsgen
-            when '1'
-                puts "please enter 'koah' or 'mil'"
-            when '2'
-                puts "please enter 'koah' or 'mil'"
-            end
+                if same == 'exit'
+                    exit
+                elsif same == 'koah'
+                    survivorkoahrong
+                elsif same == 'mil'
+                    survivormilvsgen
+                else
+                    puts "I don't understand, please choose a season!!"
+                    list_seasons
+                    self.user_choice
+                end
     end
 
     def survivorkoahrong
@@ -47,13 +48,16 @@ class CommandLineInterface
             input = gets.strip
 
             same = input.downcase
-            case same
-            when 'info'
+
+            if same == 'exit'
+                exit
+            elsif same == 'info'
                 info_koah
-            when 'castaways'
+            elsif same == 'castaways'
                 castaways_koah
-            when 'menu'
-                call
+            else
+                puts "I don't understand, please pick a valid choice."
+                survivorkoahrong
             end
     end
     
@@ -70,13 +74,16 @@ class CommandLineInterface
         input = gets.strip
 
         same = input.downcase
-        case same
-        when 'info'
+
+        if same == 'exit'
+            exit
+        elsif same == 'info'
             info_mil
-        when 'castaways'
+        elsif same == 'castaways'
             castaways_mil
-        when 'menu'
-            call
+        else
+            puts "I don't understand, please pick a valid choice."
+            survivormilvsgen
         end
     end
 
@@ -102,12 +109,16 @@ class CommandLineInterface
         puts "To see more choices about Survivor Kaôh Rōng type 'koah'"
         puts "To see go back to the main menu type 'menu'"
         input = gets.strip
-        
-        case input
-        when 'koah'
+
+        if input == 'exit'
+            exit
+        elsif input == 'koah'
             survivorkoahrong
-        when 'menu'
+        elsif input == 'menu'
             call
+        else
+            puts "I don't understand, please pick a valid choice." ####I NEED THIS TO NOT REPRINT THE SAME INFO TWICE IF THIS ELSE STATEMENT IS PROCESSED!!
+            info_koah
         end
     end
 
