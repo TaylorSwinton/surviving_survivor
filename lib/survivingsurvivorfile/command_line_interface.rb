@@ -41,7 +41,6 @@ class CommandLineInterface
             puts "What else do you want to know about surviving Kaôh Rōng?"
             puts "  To see general season information type 'info'"
             puts "  To see the castaways type 'castaways'"
-            puts "  To see the names of the episodes and who was elimanted type 'episode'"
             puts "  To go back to the main meny type 'menu'"
             puts "Enter your choice below or exit by typing 'exit':"
 
@@ -53,8 +52,6 @@ class CommandLineInterface
                 info_koah
             when 'castaways'
                 castaways_koah
-            when 'episode'
-                episode_koah
             when 'menu'
                 call
             end
@@ -67,7 +64,6 @@ class CommandLineInterface
         puts "What else do you want to know about surviving Millennials vs. Gen X?"
         puts "  To see general season information type 'info'"
         puts "  To see the castaways type 'castaways'"
-        puts "  To see the names of the episodes and who was elimanted type 'episode'"
         puts "  To go back to the main menu type 'menu'"
         puts "Enter your choice below or exit by typing 'exit':"
 
@@ -79,8 +75,6 @@ class CommandLineInterface
             info_mil
         when 'castaways'
             castaways_mil
-        when 'episode'
-            episode_mil
         when 'menu'
             call
         end
@@ -102,8 +96,6 @@ class CommandLineInterface
             puts "  Number of Days:  #{info.noofdays}"
             puts "  Number of Castaways:  #{info.noofcastaways}"
             puts "  Winner:  #{info.winner}"
-            puts "  Runner-ups:  #{info.runnerup}"
-            puts "  Tribes:  #{info.tribes}"
             puts "  Viewership in Millions:  #{info.viewship}"
         end
         puts "To exit type 'exit'"
@@ -167,25 +159,39 @@ class CommandLineInterface
         end
     end
 
-    def episode_koah
-        #should list episode name
-        #should list episode air date
-        #should list who was eliminated
-    end
-
-    def episode_koah_details(episode)
-        
-    end
-
     def info_mil
-         #should pull the 'season information'
-        #shoudld show the :version, :seasonno, :Filiminglocation, :filimingdates, :seasonrun, :noofepisodes, :noofdays, :noofcastaways, :winner, :runnerup, :tribes, :viership
+        ScraperMil.scrape_season_information_m
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "SEASON INFORMATION:"
+
+        Season.all.each do |info|
+            puts "#{info.name}"
+            puts "  Version:  #{info.version}"
+            puts "  Season Number:  #{info.seasonnumber}"
+            puts "  Film Location:  #{info.filmlocation}"
+            puts "  Film Dates:  #{info.filmdates}"
+            puts "  Season Run:  #{info.seasonrun}"
+            puts "  Number of Days:  #{info.noofdays}"
+            puts "  Number of Castaways:  #{info.noofcastaways}"
+            puts "  Winner:  #{info.winner}"
+        end
+        puts "To exit type 'exit'"
+        puts "To see more choices about Survivor Millennials vs. Gen X type 'mil'"
+        puts "To see go back to the main menu type 'menu'"
+        input = gets.strip
+        
+        case input
+        when 'mil'
+            survivormilvsgen
+        when 'menu'
+            call
+        end
     end
 
     def castaways_mil
-        ScraperWorlds.scrape_castaways_m
+        ScraperMil.scrape_castaways_m
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        puts "CASTAWAYS Worlds Apart: "
+        puts "CASTAWAYS Millennials vs. Gen X: "
         puts "To see more details about the castaways type their number:"
         Castaway.all.each_with_index do |cast, index|
             puts "  #{index+1}. #{cast.name}"
@@ -198,7 +204,7 @@ class CommandLineInterface
             puts "please enter a number for your choice of Castaways"
             self.castaways_mil
         else
-            ScraperWorlds.castaways_details_m(cast)
+            ScraperMil.castaways_details_m(cast)
         end
 
         castaways_mil_details(cast)
@@ -233,16 +239,6 @@ class CommandLineInterface
         when 'menu'
             call
         end
-    end
-
-    def episode_mil
-        #should list episode name
-        #should list episode air date
-        #should list who was eliminated
-    end
-
-    def episode_mil_details(episode)
-        
     end
 
 end
