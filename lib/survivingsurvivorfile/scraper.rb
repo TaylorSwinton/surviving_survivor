@@ -10,7 +10,7 @@ class ScraperKoah
         #binding.pry
         name = doc.css("aside").css("h2").first.text
         new_season = Season.new(name)
-
+    
         new_season.version = doc.css("aside").css("section").first.css("div").first.css("div").text
         new_season.seasonnumber = doc.css("aside").css("section")[0].css("div")[2].css("div").text
         new_season.filmlocation= doc.css("aside").css("section")[0].css("div")[4].css("div").text

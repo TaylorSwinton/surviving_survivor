@@ -7,6 +7,8 @@ class CommandLineInterface
     end
 
     def welcome
+        s = Artii::Base.new :font => 'slant'
+        puts s.asciify('Surviving Survivor')
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         puts "So you want to survive Survivor?"
         puts "Outwit, outplay, and outlast with all the Survivor details"
@@ -42,7 +44,7 @@ class CommandLineInterface
             puts "What else do you want to know about surviving Kaôh Rōng?"
             puts "  To see general season information type 'info'"
             puts "  To see the castaways type 'castaways'"
-            puts "  To go back to the main meny type 'menu'"
+            puts "  To go back to the main menu type 'menu'"
             puts "Enter your choice below or exit by typing 'exit':"
 
             input = gets.strip
@@ -55,6 +57,8 @@ class CommandLineInterface
                 info_koah
             elsif same == 'castaways'
                 castaways_koah
+            elsif same =- 'menu'
+                call
             else
                 puts "I don't understand, please pick a valid choice."
                 survivorkoahrong
@@ -81,6 +85,8 @@ class CommandLineInterface
             info_mil
         elsif same == 'castaways'
             castaways_mil
+        elsif same == 'menu'
+            call
         else
             puts "I don't understand, please pick a valid choice."
             survivormilvsgen
@@ -123,25 +129,25 @@ class CommandLineInterface
     end
 
     def castaways_koah
-        ScraperKoah.scrape_castaways_k
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        puts "CASTAWAYS Kaôh Rōng: "
-        puts "To see more details about the castaways type their number:"
-        Castaway.all.each_with_index do |cast, index|
-            puts "  #{index+1}. #{cast.name}"
-        end
-        
-        input = gets.strip
-        cast = Castaway.all[input.to_i-1]
+                scraped_date = ScraperKoah.scrape_castaways_k
+                puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                puts "CASTAWAYS Kaôh Rōng: "
+                puts "To see more details about the castaways type their number:"
+                Castaway.all.each_with_index do |cast, index|
+                    puts "  #{index+1}. #{cast.name}"
+                end
+                
+                input = gets.strip
+                cast = Castaway.all[input.to_i-1]
 
-        if cast == nil 
-            puts "please enter a number for your choice of Castaways"
-            self.castaways_koah
-        else
-            ScraperKoah.castaways_details_k(cast)
-        end
+                if cast == nil 
+                    puts "please enter a number for your choice of Castaways"
+                    self.castaways_koah
+                else
+                    ScraperKoah.castaways_details_k(cast)
+                end
 
-        castaways_koah_details(cast)
+                castaways_koah_details(cast)
     end
 
     def castaways_koah_details(cast)

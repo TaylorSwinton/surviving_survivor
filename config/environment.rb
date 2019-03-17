@@ -1,6 +1,9 @@
 require 'open-uri'
 require 'nokogiri'
 require 'pry'
+require 'colorize'
+require 'artii'
+require 'lolcat'
 
 require_relative '../lib/survivingsurvivorfile/command_line_interface.rb'
 require_relative '../lib/survivingsurvivorfile/scraper.rb'
