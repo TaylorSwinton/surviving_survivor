@@ -244,7 +244,7 @@ class CommandLineInterface
         puts ""
         puts "To exit type 'exit'"
         puts "To select another Castaway type 'castaways'"
-        puts "To see more choices about Survivor Millennials vs. Gen X type 'mil"
+        puts "To see more choices about Survivor Millennials vs. Gen X type 'mil'"
         puts "To see go back to the main menu type 'menu'"
         input = gets.strip
 
