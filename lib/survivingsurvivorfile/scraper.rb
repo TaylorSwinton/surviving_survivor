@@ -27,7 +27,7 @@ class ScraperKoah
         file = open(CAST)
         doc = Nokogiri::HTML(file)
         #binding.pry
-
+        Castaway.clear
         castaways = doc.css("article")
         castaways.drop(1).each do |castaway|
             name = castaway.css(".title").text
@@ -80,6 +80,7 @@ class ScraperMil
         doc = Nokogiri::HTML(file)
         #binding.pry
         # name and profile url
+        Castaway.clear
         castaways = doc.css("article")
         castaways.drop(1).each do |castaway|
             name = castaway.css(".title").text

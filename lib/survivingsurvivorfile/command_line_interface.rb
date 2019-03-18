@@ -143,6 +143,7 @@ class CommandLineInterface
         puts "CASTAWAYS Kaôh Rōng: "
         puts "To see more details about the castaways type their number:"
         Castaway.all.each_with_index do |cast, index|
+            #binding.pry
             puts "  #{index+1}. #{cast.name}"
         end
                 
