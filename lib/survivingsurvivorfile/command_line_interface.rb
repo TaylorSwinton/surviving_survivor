@@ -31,7 +31,7 @@ class CommandLineInterface
                 elsif same == 'mil'
                     survivormilvsgen
                 else
-                    puts "I don't understand, please choose a season!!"
+                    puts "I don't understand, please choose a season!!".red
                     list_seasons
                     self.user_choice
                 end
@@ -57,10 +57,10 @@ class CommandLineInterface
                 info_koah
             elsif same == 'castaways'
                 castaways_koah
-            elsif same =- 'menu'
+            elsif same == 'menu'
                 call
             else
-                puts "I don't understand, please pick a valid choice."
+                puts "I don't understand, please pick a valid choice.".red
                 survivorkoahrong
             end
     end
@@ -88,13 +88,18 @@ class CommandLineInterface
         elsif same == 'menu'
             call
         else
-            puts "I don't understand, please pick a valid choice."
+            puts "I don't understand, please pick a valid choice.".red
             survivormilvsgen
         end
     end
 
+    def scraped_data_info_k
+        @scraped_data_info_k ||= ScraperKoah.scrape_season_information_k
+    end
+
     def info_koah
-        ScraperKoah.scrape_season_information_k
+        Season.clear
+        scraped_data_info_k
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         puts "SEASON INFORMATION:"
 
@@ -123,31 +128,35 @@ class CommandLineInterface
         elsif input == 'menu'
             call
         else
-            puts "I don't understand, please pick a valid choice." ####I NEED THIS TO NOT REPRINT THE SAME INFO TWICE IF THIS ELSE STATEMENT IS PROCESSED!!
+            puts "I don't understand, please pick a valid choice.".red
             info_koah
         end
     end
 
+    def scraped_data_cast_k
+        @scraped_data_cast_k ||= ScraperKoah.scrape_castaways_k
+    end
+
     def castaways_koah
-                scraped_date = ScraperKoah.scrape_castaways_k
-                puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                puts "CASTAWAYS Kaôh Rōng: "
-                puts "To see more details about the castaways type their number:"
-                Castaway.all.each_with_index do |cast, index|
-                    puts "  #{index+1}. #{cast.name}"
-                end
+        scraped_data_cast_k
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "CASTAWAYS Kaôh Rōng: "
+        puts "To see more details about the castaways type their number:"
+        Castaway.all.each_with_index do |cast, index|
+            puts "  #{index+1}. #{cast.name}"
+        end
                 
-                input = gets.strip
-                cast = Castaway.all[input.to_i-1]
+        input = gets.strip
+        cast = Castaway.all[input.to_i-1]
 
-                if cast == nil 
-                    puts "please enter a number for your choice of Castaways"
-                    self.castaways_koah
-                else
-                    ScraperKoah.castaways_details_k(cast)
-                end
+        if cast == nil 
+            puts "please enter a number for your choice of Castaways"
+            self.castaways_koah
+        else
+            ScraperKoah.castaways_details_k(cast)
+        end
 
-                castaways_koah_details(cast)
+        castaways_koah_details(cast)
     end
 
     def castaways_koah_details(cast)
@@ -176,8 +185,14 @@ class CommandLineInterface
         end
     end
 
+    def scraped_data_info_m
+        @scraped_data_info_m ||= ScraperMil.scrape_season_information_m
+    end
+
     def info_mil
-        ScraperMil.scrape_season_information_m
+        Season.clear
+        #binding.pry
+        scraped_data_info_m
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         puts "SEASON INFORMATION:"
 
@@ -192,9 +207,10 @@ class CommandLineInterface
             puts "  Number of Castaways:  #{info.noofcastaways}"
             puts "  Winner:  #{info.winner}"
         end
+        
         puts "To exit type 'exit'"
         puts "To see more choices about Survivor Millennials vs. Gen X type 'mil'"
-        puts "To see go back to the main menu type 'menu'"
+        puts "To go back to the main menu type 'menu'"
         input = gets.strip
         
         case input
@@ -205,8 +221,12 @@ class CommandLineInterface
         end
     end
 
+    def scraped_data_cast_m
+        @scraped_data_cast_m ||= ScraperMil.scrape_castaways_m
+    end
+
     def castaways_mil
-        ScraperMil.scrape_castaways_m
+        scraped_data_cast_m
         puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         puts "CASTAWAYS Millennials vs. Gen X: "
         puts "To see more details about the castaways type their number:"
