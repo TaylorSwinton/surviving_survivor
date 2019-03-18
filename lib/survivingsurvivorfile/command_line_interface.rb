@@ -8,8 +8,8 @@ class CommandLineInterface
 
     def welcome
         s = Artii::Base.new :font => 'slant'
-        puts s.asciify('Surviving Survivor')
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts s.asciify('Surviving Survivor').red
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "So you want to survive Survivor?"
         puts "Outwit, outplay, and outlast with all the Survivor details"
         puts "Please choose a season by entering 'koah' or 'mil'. If you would like to exit type 'exit'"
@@ -38,7 +38,7 @@ class CommandLineInterface
     end
 
     def survivorkoahrong
-            puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
             puts "Welcome to Kaôh Rōng!"
             puts "Where the division of the tribes is based on the most prominent personal attributes of each castaway."
             puts "What else do you want to know about surviving Kaôh Rōng?"
@@ -66,7 +66,7 @@ class CommandLineInterface
     end
     
     def survivormilvsgen
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "Welcome to Millennials vs. Gen X!"
         puts "Where the division of the tribes were divided based on generation: Millennials vs. Gen X."
         puts "What else do you want to know about surviving Millennials vs. Gen X?"
@@ -100,7 +100,7 @@ class CommandLineInterface
     def info_koah
         Season.clear
         scraped_data_info_k
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "SEASON INFORMATION:"
 
         Season.all.each do |info|
@@ -139,7 +139,7 @@ class CommandLineInterface
 
     def castaways_koah
         scraped_data_cast_k
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "CASTAWAYS Kaôh Rōng: "
         puts "To see more details about the castaways type their number:"
         Castaway.all.each_with_index do |cast, index|
@@ -161,7 +161,7 @@ class CommandLineInterface
     end
 
     def castaways_koah_details(cast)
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "Your castaway choice: "
         puts cast.age
         puts cast.hometown
@@ -194,7 +194,7 @@ class CommandLineInterface
         Season.clear
         #binding.pry
         scraped_data_info_m
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "SEASON INFORMATION:"
 
         Season.all.each do |info|
@@ -228,7 +228,7 @@ class CommandLineInterface
 
     def castaways_mil
         scraped_data_cast_m
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "CASTAWAYS Millennials vs. Gen X: "
         puts "To see more details about the castaways type their number:"
         Castaway.all.each_with_index do |cast, index|
@@ -249,7 +249,7 @@ class CommandLineInterface
     end
 
     def castaways_mil_details(cast)
-        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        puts "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx".red
         puts "Your castaway choice: "
         puts cast.name
         puts ''
