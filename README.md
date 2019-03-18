@@ -1,8 +1,6 @@
 # SurvivingSurvivor
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/surviving_survivor`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This gem provides you season and cast details for the series Survivor that appears on CBS. Each season provides you with basic season information, the cast names and also details about each cast member. With all these details I know it can help you survive Survivor.
 
 ## Installation
 
